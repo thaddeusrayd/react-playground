@@ -6,12 +6,14 @@ function SubscriberForm() {
     email: "",
     referral: "youtube",
     age: "",
+    subscription: true,
   };
   const [formData, setFormData] = useState({ ...initialFormState });
   const handleChange = ({ target }) => {
+    const value = target.type === "checkbox" ? target.checked : target.value;
     setFormData({
       ...formData,
-      [target.name]: target.value,
+      [target.name]: value,
     });
   };
 
@@ -96,6 +98,18 @@ function SubscriberForm() {
           />
         </label>
       </fieldset>
+      <br />
+      <label htmlFor="subscription">
+        Receive email notifications?
+        <input
+          id="subscription"
+          type="checkbox"
+          name="subscription"
+          onChange={handleChange}
+          checked={formData.subscription}
+          value="subscription"
+        />
+      </label>
       <br />
       <button type="submit">Submit</button>
     </form>
