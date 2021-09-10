@@ -2,8 +2,10 @@ import { useState } from "react";
 
 function SubscriberForm() {
   const initialFormState = {
-    name: "Thad",
+    name: "",
     email: "",
+    referral: "youtube",
+    age: "",
   };
   const [formData, setFormData] = useState({ ...initialFormState });
   const handleChange = ({ target }) => {
@@ -57,6 +59,43 @@ function SubscriberForm() {
           <option value="youtube">YouTube</option>
         </select>
       </label>
+      <br />
+      <fieldset>
+        <legend>How old are you?</legend>
+        <label htmlFor="low">
+          Under 18
+          <input
+            id="low"
+            type="radio"
+            name="age"
+            onChange={handleChange}
+            value="low"
+            checked={formData.age === "low"}
+          />
+        </label>
+        <label htmlFor="middle">
+          18 - 60
+          <input
+            id="middle"
+            type="radio"
+            name="age"
+            onChange={handleChange}
+            value="middle"
+            checked={formData.age === "middle"}
+          />
+        </label>
+        <label htmlFor="high">
+          60+
+          <input
+            id="high"
+            type="radio"
+            name="age"
+            onChange={handleChange}
+            value="middle"
+            checked={formData.age === "high"}
+          />
+        </label>
+      </fieldset>
       <br />
       <button type="submit">Submit</button>
     </form>
