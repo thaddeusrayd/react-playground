@@ -1,20 +1,24 @@
 import { useState } from "react";
 
-function SubscriberForm({ createSubscriber }) {
-  const [name, setName] = useState("");
-  const handleNameChange = (event) => setName(event.target.value);
-  const [email, setEmail] = useState("");
-  const handleEmailChange = (event) => setEmail(event.target.value);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submitted:", name, email);
-    createSubscriber({ name, email });
-    setName("");
-    setEmail("");
+function SubscriberForm() {
+  const initialFormState = {
+    name: "Thad",
+    email: "",
+  };
+  const [formData, setFormData] = useState({ ...initialFormState });
+  const handleChange = ({ target }) => {
+    setFormData({
+      ...formData,
+      [target.name]: target.value,
+    });
   };
 
-  console.log("Current value of name:", name);
-  console.log("Current value of email:", name);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Submitted:", formData);
+    setFormData({ ...initialFormState });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="name">
@@ -23,20 +27,37 @@ function SubscriberForm({ createSubscriber }) {
           id="name"
           type="text"
           name="name"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={formData.name}
         />
       </label>
+      <br />
       <label htmlFor="email">
         Your Email:
         <input
           id="email"
           type="email"
           name="email"
-          onChange={handleEmailChange}
-          value={email}
+          onChange={handleChange}
+          value={formData.email}
         />
       </label>
+      <br />
+      <label htmlFor="referral">
+        How did you hear about us?
+        <select
+          id="referral"
+          name="referral"
+          onChange={handleChange}
+          value={formData.referral}
+        >
+          <option value="">-- Select an Option --</option>
+          <option value="twitter">Twitter</option>
+          <option value="wom">Word of Mouth</option>
+          <option value="youtube">YouTube</option>
+        </select>
+      </label>
+      <br />
       <button type="submit">Submit</button>
     </form>
   );
