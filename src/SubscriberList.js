@@ -16,3 +16,5 @@ function SubscriberList({ deleteSubscriber, subscribers }) {
     </>
   );
 }
+
+export default SubscriberList;
