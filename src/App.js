@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-import SubscriberForm from "./SubscriberForm";
-import SubscriberList from "./SubscriberList";
+import "../src/App.css";
+import ProfileEdit from "./ProfileEdit";
 
 function App() {
-  const [subscribers, setSubscribers] = useState([]);
-  const createSubscriber = (newSubscriber) =>
-    setSubscribers((currentSubscribers) => [
-      newSubscriber,
-      ...currentSubscribers,
-    ]);
-  const deleteSubscriber = (indexToDelete) =>
-    setSubscribers((currentSubscribers) =>
-      currentSubscribers.filter((post, index) => index !== indexToDelete)
-    );
+  const [userId, setUserID] = useState(1);
+
+  const userIds = [1, 2, 3, 4];
 
   return (
-    <>
-      <SubscriberForm createSubscriber={createSubscriber} />
-      <SubscriberList
-        deleteSubscriber={deleteSubscriber}
-        subscribers={subscribers}
-      />
-    </>
+    <div className="App">
+      {userIds.map((id) => (
+        <button key={id} onClick={() => setUserID(id)}>
+          User ID {id}
+        </button>
+      ))}
+      <h2>User ID {userId}</h2>
+      <ProfileEdit userID={userId} />
+    </div>
   );
 }
 
